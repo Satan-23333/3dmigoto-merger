@@ -774,8 +774,11 @@ def disable_ini(path):
         if "disabled" in root.lower():
             continue
         for file in files:
-            if os.path.splitext(file)[1] == ".ini" and not file.lower().startswith(
-                ("disabled", "merged") and "with_namespace_enable" not in file.lower()
+            if (
+                os.path.splitext(file)[1] == ".ini"
+                and not file.lower().startswith("disabled")
+                and "with_namespace_enable" not in file.lower()
+                and "merged" not in file.lower()
             ):
                 print(f"\tDisabling {os.path.join(root, file)}")
                 file_path = os.path.join(root, file)
@@ -984,8 +987,8 @@ def add_namespace_enable(ini_files, master_namespace):
         with open(file, "r", encoding="utf-8") as f:
             ini_lines = f.readlines()
         namespace = f"{master_namespace}{file.lstrip('.').rstrip('.ini')}"
-        namespace_list.append(namespace)
         content, namespace = modify_namespace(ini_lines, namespace, i)
+        namespace_list.append(namespace)
         # print("namespace:", namespace, "\n")
         # if "namespace" not in content:
         #     with open(file, "w", encoding="utf-8") as f:
