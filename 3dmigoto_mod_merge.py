@@ -75,7 +75,7 @@ def main():
     if args.active:
         print("Setting to swap only the active(on-screen) character")
 
-    enable_ini(args.root)
+    # enable_ini(args.root)
 
     if args.enable:
         print("Re-enabling all .ini files")
